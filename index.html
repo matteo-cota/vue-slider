@@ -1,14 +1,30 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Carousel</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    
+    <div id="carousel-container">
+        <div id="carousel" @mouseenter="stopAutoplay" @mouseleave="startAutoplay">
+            <button id="prev-arrow" @click="prevImage">&#9650;</button>
+            <img id="carousel-image" :src="currentImage.src" :alt="currentImage.title">
+            <button id="next-arrow" @click="nextImage">&#9650;</button>
+        </div>
+        <div id="thumbnails">
+            <img v-for="(image, index) in images" :key="index" :src="image.src" :alt="image.title" 
+                 :class="['thumbnail', {active: currentIndex === index}]" 
+                 @click="selectImage(index)">
+        </div>
+        <div class="write">
+            <h2>{{ currentImage.title }}</h2>
+            <p>{{ currentImage.description }}</p>
+        </div>
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
